@@ -1,0 +1,6 @@
+\contentsline {chapter}{\numberline {1}Suffix tree}{2}
+\contentsline {section}{\numberline {1.1}Incremental update of the suffix tree}{2}
+\contentsline {section}{\numberline {1.2}Context set}{3}
+\contentsline {subsection}{\numberline {1.2.1}Adding new contexts and new codewords}{4}
+\contentsline {chapter}{\numberline {2}User's manual}{5}
+\contentsline {section}{\numberline {2.1}Context}{5}
