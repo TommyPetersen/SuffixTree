@@ -1,0 +1,82 @@
+package SuffixTree.Java;
+
+import java.util.*;
+
+class test{
+
+    private static suffixTree T;
+
+    public static void main(String args[]) throws Exception{
+
+	int K = 2;
+	int capacity = 100;
+	contextSet CS = null;
+
+	T = new suffixTree(K);
+
+	T.add(0);
+	T.add(1);
+	T.add(1);
+	T.add(0);
+	T.add(1);
+	T.add(0);
+	T.add(0);
+	T.add(1);
+	T.add(1);
+	T.add(0);
+	T.add(1);
+	T.add(0);
+	T.add(1);
+	T.add(1);
+	T.add(0);
+	CS = T.add(1);
+	//	T.add(0);
+	//	CS = T.add(0);
+
+	Random rand = new Random();
+
+	/*	for (int i=0; i<capacity; i++){
+	    try{
+		CS = T.add(rand.nextInt(K));
+		traverseCS(CS);
+	    } catch(java.lang.OutOfMemoryError E){
+		System.out.println("Caught: " + E);
+		System.exit(1);
+	    }
+	    }*/
+
+	print(CS);
+	traverseCS(CS);
+	System.out.println("Done!");
+    }
+
+    private static void print(contextSet CS){
+	T.printCodeTree();
+	System.out.println("Number of contexts: " + CS.size());
+	CS.print("--");
+    }
+
+    private static void traverseCS(contextSet CS){
+	System.out.println("\nL = " + T.getL());
+	Context C = null;
+	ArrayList symbols = null;
+	int size = CS.size();
+	System.out.println("contextSet.size = " + size);
+	for (int i=1; i<size; i++){
+	    C = CS.get(i);
+	    //	    System.out.println("Has decoded suffix: " + C.hasDecodedSuffix());
+	    System.out.print("Writing out context nr. " + i + ": ");
+	    symbols = C.getSymbols();
+	    if (symbols.size() > 0){
+		for (int j=0; j<symbols.size()-1; j++) System.out.print(((Integer)symbols.get(j)).intValue() + " ");
+		System.out.println(((Integer)symbols.get(symbols.size()-1)).intValue());
+	    } else System.out.println();
+	    System.out.println("size = " + C.getSize());
+	    ArrayList A = C.getInstanceEndPoints(0);
+	    System.out.println("A = " + A);
+	    for (int j=0; j<A.size(); j++){
+		System.out.println("(" + (((Integer) A.get(j)).intValue() - C.getSize() + 1) + ", " + A.get(j) + ")");
+	    }
+	}
+    }
+}

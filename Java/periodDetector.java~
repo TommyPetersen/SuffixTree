@@ -1,0 +1,76 @@
+package AIAgents.SuffixTree.Java.Chooser;
+
+import java.util.*;
+import AIAgents.SuffixTree.Java.*;
+
+public class periodDetector{
+
+    private boolean periodDetected;
+    private int threshold;
+    private Context previousContext;
+    private boolean isTraversingBlock;
+    private ArrayList block;
+    private int blockLength;
+    private int nrOfBlocksTraversed;
+    private int counter;
+
+    public periodDetector(int threshold){
+	this.periodDetected = false;
+	this.threshold = threshold;
+	this.isTraversingBlock = false;
+	this.block = new ArrayList();
+	this.blockLength = 0;
+	this.nrOfBlocksTraversed = 0;
+	this.counter = 0;
+    }
+
+    public boolean nextContext(Context C){
+	periodDetected = false;
+
+	if (!isTraversingBlock){
+	    if (C.hasDecodedSuffix()){
+		int direction = C.getDirection();
+		ArrayList L = C.getL();
+		int indexFrom = C.getBaseVertex().getIndexFrom(direction);
+		int indexTo = L.size() - 1;
+
+		block = new ArrayList();
+
+		for (int i=indexFrom; i<=indexTo; i++){
+		    block.add((Integer)L.get(i));
+		}
+
+		blockLength = block.size();
+
+		counter = 1;
+		nrOfBlocksTraversed = 0;
+
+		isTraversingBlock = true;
+	    }
+	} else{
+	    if (C.hasDecodedSuffix() && C.isExtensionOf(previousContext)){
+		counter++;
+		if (counter == blockLength){
+		    nrOfBlocksTraversed++;
+		    counter = 0;
+		}
+		if (nrOfBlocksTraversed * blockLength + counter >= threshold)
+		    periodDetected = true;
+	    } else{
+		block = new ArrayList();
+		blockLength = 0;
+		nrOfBlocksTraversed = 0;
+		counter = 0;
+		isTraversingBlock = false;
+	    }
+	}
+
+	previousContext = C;
+	return periodDetected;
+    }
+
+    public ArrayList getPeriod(){
+	if (periodDetected) return block;
+	else return new ArrayList();
+    }
+}
