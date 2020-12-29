@@ -1,0 +1,28 @@
+# Java:
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+
+# Archive / Compressed:
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.bak
+
+# TeX / XFig:
+*.pstex*
+*.aux
+*.tex
+*.fig
+*.eps
+Documentation/Geometry/Fig/xfigNotes.txt
+Documentation/RikiFormi/Fig/xfigNotes.txt
+
+# Emacs:
+*.*~
+
+# Log:
+*.log
