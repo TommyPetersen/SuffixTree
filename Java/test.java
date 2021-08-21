@@ -71,7 +71,7 @@ class test{
 		System.out.println(((Integer)symbols.get(symbols.size()-1)).intValue());
 	    } else System.out.println();
 	    System.out.println("size = " + C.getSize());
-	    ArrayList A = C.getInstanceEndPoints(0);
+	    ArrayList A = C.getInstanceEndPoints();
 	    System.out.println("A = " + A);
 	    for (int j=0; j<A.size(); j++){
 		System.out.println("(" + (((Integer) A.get(j)).intValue() - C.getSize() + 1) + ", " + A.get(j) + ")");

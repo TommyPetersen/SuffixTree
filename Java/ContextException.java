@@ -36,7 +36,7 @@ public class ContextException extends Exception{
 
        @param cause Describes the cause of this exception
      */
-    protected ContextException(String cause){
+    public ContextException(String cause){
 	this.cause = cause;
     }
 

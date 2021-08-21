@@ -75,6 +75,34 @@ public class suffixTree{
     }
 
     /**
+       Adds the symbols in a given string to the symbol list
+       and updates the suffix tree accordingly.
+       The new context set is returned.
+
+       @param  s The symbols to be added to the symbol list.
+       @return   The new context set for the extended symbol list
+       @throws   java.lang.OutOfMemoryError If there is not enough
+                 store in order to add the new symbols
+     */
+    
+    public contextSet add(String s) throws java.lang.OutOfMemoryError{
+
+	if ((s == null) || (s.trim().isEmpty())) return CS;
+
+	try{
+	    for (int i = 0; i < s.length(); i++){
+		CS = this.add(Integer.parseInt(Character.toString(s.charAt(i))));
+	    }
+	} catch (NumberFormatException NFE){
+	    System.out.println("! ERROR IN INPUT DATA !");
+	    System.out.println(NFE);
+	    System.exit(1);
+	}
+
+	return CS;
+    }
+
+    /**
        Returns the root vertex of the suffix tree.
 
        @return   The root vertex of the suffix tree

@@ -196,7 +196,7 @@ public class Context{
        @return The symbol list used to create the
                entire suffix tree
      */
-    protected ArrayList getL(){
+    public ArrayList getL(){
 	return L;
     }
 
@@ -263,43 +263,54 @@ public class Context{
 	}
     }
 
+    /* Finds the instance endpoint for the zeroth instance. */
+    public int getZerothInstanceEndPoint() throws ContextException{
+	ArrayList<Integer> instanceEndPoints = getInstanceEndPoints();
+	if (instanceEndPoints.size() > 0) {
+	    return ((Integer) getInstanceEndPoints().get(0)).intValue();
+	} else {
+	    throw new ContextException("There are no context instances");
+	}
+    }
+
+    /* Finds the instance endpoints for zero, one or more instances. */
+    public ArrayList<Integer> getInstanceEndPoints(){
+    	return getInstanceEndPointsRecur(0);
+    }
+    
     /*
       To find the instance endpoints for the context, first find the
       decoding points and then subtract the length of the decoding
       sequence (accumulated in l).
     */
-    public ArrayList<Integer> getInstanceEndPoints(int l){
+    private ArrayList<Integer> getInstanceEndPointsRecur(int l){
 	ArrayList<Integer> A = new ArrayList<Integer>();
 	if (direction < 0){
 	    Context C = null;
 	    int K = baseVertex.getK();
-	    //	    System.out.println("Block A");
 	    for (int k=0; k<K; k++){
 		if (baseVertex.getChild(k) != null){
 		    try{
 			C = newContext( ((Integer) L.get(baseVertex.getIndexFrom(k))).intValue()  );
-			A.addAll(C.getInstanceEndPoints(l + 1));
+			A.addAll(C.getInstanceEndPointsRecur(l + 1));
 		    } catch(ContextException CE){
 			System.out.println("ContextException : " + CE);
 			System.exit(1);
 		    }
 		}
-		//	    System.out.println("DONE Block A");
 	    }
 	} else{
-	    //	    System.out.println("Block B");
 	    if (hasDecodedSuffix()){
 		A.add(Integer.valueOf(baseVertex.getIndexFrom(direction) + offset - l));
 	    } else{
 		try{
 		    Context C = newContext( ((Integer) L.get(baseVertex.getIndexFrom(direction) + offset + 1)).intValue() );
-		    A = C.getInstanceEndPoints(l + 1);
+		    A = C.getInstanceEndPointsRecur(l + 1);
 		} catch(ContextException CE){
 		    System.out.println("ContextException : " + CE);
 		    System.exit(1);
 		}
 	    }
-	    //	    System.out.println("DONE Block B");
 	}
 	return new ArrayList<Integer>(new TreeSet<Integer>(A)); //TreeSet sorts A
     }
