@@ -33,19 +33,9 @@ class test{
 
 	Random rand = new Random();
 
-	T2 = new suffixTree(K);
-	for (int i=0; i<capacity; i++){
-	    try{
-		CS2 = T2.add(rand.nextInt(K));
-		traverseCS(T2, CS2);
-	    } catch(java.lang.OutOfMemoryError E){
-		System.out.println("Caught: " + E);
-		System.exit(1);
-	    }
-	}
-
-	/*	print(T1, CS1);
-		traverseCS(T1, CS1);*/
+	T2 = new suffixTree(5);
+	CS2 = T2.add("0 \t1\t\t   0 3 4 2\t0 1");
+	traverseCS(T2, CS2);
 	System.out.println("Done!");
     }
 
@@ -72,8 +62,9 @@ class test{
 	    } else System.out.println();
 	    System.out.println("size = " + C.getSize());
 	    ArrayList A = C.getInstanceEndPoints();
-	    System.out.println("A = " + A);
+	    System.out.println("End points for context instaces = " + A);
 	    for (int j=0; j<A.size(); j++){
+		System.out.println("Start points and end points for instances:");
 		System.out.println("(" + (((Integer) A.get(j)).intValue() - C.getSize() + 1) + ", " + A.get(j) + ")");
 	    }
 	}

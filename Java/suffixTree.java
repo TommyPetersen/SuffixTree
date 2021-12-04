@@ -79,7 +79,8 @@ public class suffixTree{
        and updates the suffix tree accordingly.
        The new context set is returned.
 
-       @param  s The symbols to be added to the symbol list.
+       @param  s The symbols to be added to the symbol list. The
+                 symbols are separated by white spaces.
        @return   The new context set for the extended symbol list
        @throws   java.lang.OutOfMemoryError If there is not enough
                  store in order to add the new symbols
@@ -90,8 +91,10 @@ public class suffixTree{
 	if ((s == null) || (s.trim().isEmpty())) return CS;
 
 	try{
-	    for (int i = 0; i < s.length(); i++){
-		CS = this.add(Integer.parseInt(Character.toString(s.charAt(i))));
+	    String[] numberStrings = s.split("\\s+");
+
+	    for (String ss : numberStrings){
+		CS = this.add(Integer.parseInt(ss));
 	    }
 	} catch (NumberFormatException NFE){
 	    System.out.println("! ERROR IN INPUT DATA !");
