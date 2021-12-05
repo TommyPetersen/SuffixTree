@@ -105,6 +105,19 @@ public class suffixTree{
 	return CS;
     }
 
+    public contextSet add(ArrayList<Integer> a) throws java.lang.OutOfMemoryError{
+
+	if (a == null) return CS;
+
+	Iterator<Integer> I = a.iterator();
+
+	while (I.hasNext()){
+	    CS = this.add(I.next());
+	}
+
+	return CS;
+    }
+
     /**
        Returns the root vertex of the suffix tree.
 

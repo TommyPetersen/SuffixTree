@@ -4,13 +4,13 @@ import java.util.*;
 
 class test{
 
-    private static suffixTree T1, T2;
+    private static suffixTree T1, T2, T3;
 
     public static void main(String args[]) throws Exception{
 
 	int K = 2;
 	int capacity = 10;
-	contextSet CS1, CS2 = null;
+	contextSet CS1, CS2, CS3 = null;
 
 	T1 = new suffixTree(K);
 
@@ -31,11 +31,16 @@ class test{
 	T1.add(0);
 	CS1 = T1.add(1);
 
-	Random rand = new Random();
-
 	T2 = new suffixTree(5);
 	CS2 = T2.add("0 \t1\t\t   0 3 4 2\t0 1");
 	traverseCS(T2, CS2);
+	System.out.println("Done!");
+
+	T3 = new suffixTree(5);
+	ArrayList<Integer> a = new ArrayList<Integer>();
+	a.add(0); a.add(1); a.add(0);
+	CS3 = T3.add(a);
+	traverseCS(T3, CS3);
 	System.out.println("Done!");
     }
 
