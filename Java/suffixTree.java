@@ -112,7 +112,7 @@ public class suffixTree{
 	Iterator<Integer> I = a.iterator();
 
 	while (I.hasNext()){
-	    CS = this.add(I.next());
+	    CS = this.add(I.next().intValue());
 	}
 
 	return CS;
